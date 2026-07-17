@@ -51,11 +51,15 @@ a{color:inherit}
 /* ── scroll progress ───────────── */
 #prog{position:fixed;top:0;left:0;height:2px;width:0%;background:var(--signal);z-index:50;transition:width .1s linear}
 
-/* ── custom cursor ─────────────── */
-#cur{position:fixed;top:0;left:0;width:7px;height:7px;border-radius:50%;background:var(--signal);
-  pointer-events:none;z-index:60;transform:translate(-50%,-50%);transition:width .28s var(--ease),height .28s var(--ease),opacity .3s;opacity:0}
-#cur.big{width:44px;height:44px;background:rgba(190,58,36,.16);border:1px solid var(--signal)}
-@media(hover:none),(pointer:coarse){#cur{display:none}}
+/* ── inverting spotlight ───────── */
+#spot{position:fixed;top:0;left:0;width:150px;height:150px;margin:-75px 0 0 -75px;
+  border-radius:50%;pointer-events:none;z-index:60;opacity:0;
+  border:1px solid var(--signal);will-change:transform;
+  -webkit-backdrop-filter:invert(1) hue-rotate(180deg);
+  backdrop-filter:invert(1) hue-rotate(180deg);
+  transition:width .28s var(--ease),height .28s var(--ease),margin .28s var(--ease),opacity .3s}
+#spot.big{width:210px;height:210px;margin:-105px 0 0 -105px}
+@media(hover:none),(pointer:coarse){#spot{display:none}}
 
 /* ── reveal (JS-gated: visible if JS fails) ── */
 .js-on .rv{opacity:0;transform:translateY(14px)}
@@ -179,7 +183,7 @@ footer{margin-top:76px;padding-top:17px;border-top:1px solid var(--rule);
 </head>
 <body>
 <div id="prog"></div>
-<div id="cur"></div>
+<div id="spot"></div>
 
 <div class="wrap">
   <header>
@@ -358,20 +362,35 @@ document.querySelectorAll('.job').forEach(job => {
   job.addEventListener('mouseenter', () => s.run());
 });
 
-/* ── custom cursor + magnetic ── */
-if (matchMedia('(hover:hover)').matches && !RM){
-  const cur = document.getElementById('cur');
-  let cx=0, cy=0, tx=0, ty=0;
-  addEventListener('mousemove', e => { tx=e.clientX; ty=e.clientY; cur.style.opacity=1; });
-  (function loop(){ cx+=(tx-cx)*.18; cy+=(ty-cy)*.18;
-    cur.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;
-    requestAnimationFrame(loop); })();
+/* ── inverting spotlight ── */
+const FINE = matchMedia('(hover:hover) and (pointer:fine)').matches;
+const CAN_INVERT = !!(window.CSS && CSS.supports && CSS.supports('backdrop-filter','invert(1)'));
+const spot = document.getElementById('spot');
 
-  document.querySelectorAll('a, .job').forEach(el => {
-    el.addEventListener('mouseenter', () => cur.classList.add('big'));
-    el.addEventListener('mouseleave', () => cur.classList.remove('big'));
+if (spot && FINE && !RM && CAN_INVERT){
+  let cx=innerWidth/2, cy=innerHeight/2, tx=cx, ty=cy, seen=false;
+  addEventListener('mousemove', e => {
+    tx=e.clientX; ty=e.clientY;
+    if (!seen){ seen=true; spot.style.opacity=1; }
   });
+  document.addEventListener('mouseleave', () => spot.style.opacity=0);
 
+  (function loop(){
+    cx+=(tx-cx)*.16; cy+=(ty-cy)*.16;
+    spot.style.transform=`translate3d(${cx}px,${cy}px,0)`;
+    requestAnimationFrame(loop);
+  })();
+
+  document.querySelectorAll('a, .job, .btn, .mail').forEach(el => {
+    el.addEventListener('mouseenter', () => spot.classList.add('big'));
+    el.addEventListener('mouseleave', () => spot.classList.remove('big'));
+  });
+} else if (spot){
+  spot.remove();  // touch / reduced-motion / no backdrop-filter → render nothing
+}
+
+/* ── magnetic buttons (independent of the spotlight) ── */
+if (FINE && !RM){
   document.querySelectorAll('.mag').forEach(el => {
     el.addEventListener('mousemove', e => {
       const r = el.getBoundingClientRect();
