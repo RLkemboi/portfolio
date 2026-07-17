@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lakson — Network Security &amp; Web Systems</title>
-<meta name="description" content="Final-year Computer Networks & Cybersecurity student. I build intrusion detection tools, edge-deployed web systems, and things people actually use. Nairobi.">
-<meta property="og:title" content="Lakson — Network Security & Web Systems">
-<meta property="og:description" content="I build network security tools and web systems. Nairobi.">
+<title>Lakson — Web Systems, Shipped</title>
+<meta name="description" content="First-year Computer Science student at Kabarak University. I build web systems that run in production, not coursework demos. Nairobi.">
+<meta property="og:title" content="Lakson — Web Systems, Shipped">
+<meta property="og:description" content="I build web systems that run in production. Nairobi.">
 <meta name="theme-color" content="#F2EEE6">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -138,6 +138,14 @@ body:not(.js-on) .sec-h .line{transform:scaleX(1)}
   transition:all .3s var(--ease);color:var(--signal);font-size:18px}
 .job:hover .arw{opacity:1;transform:none}
 
+/* ── credentials ───────────────── */
+.creds{margin-top:16px}
+.cred{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  padding:11px 0;border-bottom:1px solid var(--rule)}
+.cred:last-child{border-bottom:0}
+.ci{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-30);flex-shrink:0}
+.cs{font-size:13.5px;color:var(--ink);flex:1}
+
 /* ── about ─────────────────────── */
 .about{margin-top:22px;font-size:14px;line-height:1.78;max-width:58ch}
 .about p+p{margin-top:15px}
@@ -181,20 +189,20 @@ footer{margin-top:76px;padding-top:17px;border-top:1px solid var(--rule);
     </div>
 
     <h1><span class="w"><span>I build things</span></span><br>
-        <span class="w"><span>that <em>watch the wire.</em></span></span></h1>
+        <span class="w"><span>that <em>run in production.</em></span></span></h1>
 
     <p class="lede rv">
-      Final-year Computer Networks &amp; Cybersecurity at Kabarak University.
-      <span>I write intrusion detection tooling in Python, ship web systems to the edge,
-      and run a fragrance brand on the side because shipping to real customers teaches
-      things coursework doesn't.</span>
+      First-year Computer Science at Kabarak University.
+      <span>I ship things that run in production, not coursework demos — an edge-deployed
+      fines portal, an offline-first ledger PWA, and a fragrance brand taking real orders
+      in Nairobi. The list below is what's out there.</span>
     </p>
 
     <nav class="meta rv">
       <a class="btn mag" href="mailto:ralphk@kabarak.ac.ke">Email</a>
       <a class="btn mag" href="#" data-fix="github">GitHub</a>
       <a class="btn mag" href="#" data-fix="linkedin">LinkedIn</a>
-      <span class="btn static">Open to grad roles</span>
+      <span class="btn static">Open to internships and freelance work</span>
     </nav>
   </header>
 
@@ -207,7 +215,7 @@ footer{margin-top:76px;padding-top:17px;border-top:1px solid var(--rule);
         <div class="jt"><span class="scr">Lightweight IDS</span><span class="arw">→</span></div>
         <div class="jn">01</div>
       </div>
-      <div class="jd">A network intrusion detection system built from raw packet capture up — sniffing live traffic, parsing headers, flagging signatures and anomalies without the weight of a full Snort deployment. Final-year project, supervised.</div>
+      <div class="jd">A network intrusion detection system built from raw packet capture up — sniffing live traffic, parsing headers, flagging signatures and anomalies without the weight of a full Snort deployment.</div>
       <div class="jstack"><i>Python</i>·<i>Scapy</i>·Packet analysis·Signature matching</div>
     </a>
 
@@ -253,11 +261,19 @@ footer{margin-top:76px;padding-top:17px;border-top:1px solid var(--rule);
   </section>
 
   <section class="sec">
+    <div class="sec-h rv"><span>Credentials</span><span class="line"></span></div>
+    <div class="creds rv">
+      <div class="cred"><span class="ci">Zetech University</span><span class="cs">Web Programming</span><span class="live">Complete</span></div>
+      <div class="cred"><span class="ci">University of Helsinki</span><span class="cs">Full Stack Open</span><span class="wip">In progress</span></div>
+      <div class="cred"><span class="ci">University of Helsinki</span><span class="cs">Data Science</span><span class="wip">In progress</span></div>
+    </div>
+  </section>
+
+  <section class="sec">
     <div class="sec-h rv"><span>What I'm about</span><span class="line"></span></div>
     <div class="about rv">
-      <p>My degree is networks and security; my instinct is to <b>ship</b>. Those pull in different directions and I think that's the useful part — I can read a packet capture and I can get a thing deployed to production the same week.</p>
-      <p>Everything in that list is self-directed personal work; my coursework lives elsewhere.
-      Currently working through Full Stack Open (Helsinki) on the Node/Express track, building toward fullstack seriously rather than as a hobby. I'd rather show you a system with a known weakness than a demo with hidden ones.</p>
+      <p>I'm in my first year of Computer Science. The building started before the degree did, and it's what I choose to <b>ship</b> on my own time.</p>
+      <p>Everything in that list is self-directed personal work; my coursework lives elsewhere. I'd rather show you a system with a known weakness than a demo with hidden ones.</p>
     </div>
   </section>
 
